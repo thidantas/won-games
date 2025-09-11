@@ -51,7 +51,7 @@ export default async function ProfilePage({ params }: PageProps) {
     return notFound()
   }
 
-  const content = profileComponents[slug as Slugs]
+  const content = profileComponents[slug]
 
   return <Profile>{content}</Profile>
 }

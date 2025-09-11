@@ -1,3 +1,5 @@
+'use client'
+
 import Base from 'templates/Base'
 import Empty from 'components/Empty'
 import Heading from 'components/Heading'

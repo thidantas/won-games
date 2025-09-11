@@ -1,52 +1,110 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
-import { AccountCircle, Email, Lock } from '@styled-icons/material-outlined'
+import {
+  Lock,
+  Email,
+  ErrorOutline,
+  AccountCircle
+} from '@styled-icons/material-outlined'
 
+import useRegister from 'services/client/auth/useRegister'
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FormWrapper, FormLink } from 'components/Form'
+import { FormWrapper, FormLink, FormError } from 'components/Form'
+import { PacmanLoading } from 'components/PacmanLoading'
+import { FieldErrors, signUpValidate } from 'utils/validations/validators'
 
-const FormSignUp = () => (
-  <FormWrapper>
-    <form>
-      <TextField
-        name="name"
-        placeholder="Name"
-        type="name"
-        icon={<AccountCircle />}
-      />
+const FormSignUp = () => {
+  const { register, loading, error } = useRegister()
+  const [fieldError, setFieldError] = useState<FieldErrors>({})
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  })
 
-      <TextField
-        name="email"
-        placeholder="Email"
-        type="email"
-        icon={<Email />}
-      />
+  const handleInput = (field: string, value: string) => {
+    setValues((s) => ({ ...s, [field]: value }))
+  }
 
-      <TextField
-        name="password"
-        placeholder="Password	"
-        type="password"
-        icon={<Lock />}
-      />
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
 
-      <TextField
-        name="confirm-password"
-        placeholder="Confirm password"
-        type="password"
-        icon={<Lock />}
-      />
+    const validationErrors = signUpValidate(values)
 
-      <Button size="large" fullWidth>
-        Sign up
-      </Button>
+    if (Object.keys(validationErrors).length) {
+      setFieldError(validationErrors)
+      return
+    }
 
-      <FormLink>
-        Already have an account? <Link href="/sign-in">Sign in</Link>
-      </FormLink>
-    </form>
-  </FormWrapper>
-)
+    setFieldError({})
+
+    await register({
+      username: values.username,
+      email: values.email,
+      password: values.password
+    })
+  }
+
+  return (
+    <FormWrapper>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          name="username"
+          type="text"
+          placeholder="Username"
+          error={fieldError?.username}
+          icon={<AccountCircle />}
+          onInputChange={(v) => handleInput('username', v)}
+        />
+
+        <TextField
+          name="email"
+          type="email"
+          error={fieldError?.email}
+          icon={<Email />}
+          placeholder="Email"
+          onInputChange={(v) => handleInput('email', v)}
+        />
+
+        <TextField
+          name="password"
+          type="password"
+          error={fieldError?.password}
+          icon={<Lock />}
+          placeholder="Password	"
+          onInputChange={(v) => handleInput('password', v)}
+        />
+
+        <TextField
+          name="confirm_password"
+          type="password"
+          error={fieldError?.confirm_password}
+          icon={<Lock />}
+          placeholder="Confirm password"
+          onInputChange={(v) => handleInput('confirm_password', v)}
+        />
+
+        {!!error && (
+          <FormError>
+            <ErrorOutline />
+            {error}
+          </FormError>
+        )}
+
+        <Button size="large" fullWidth type="submit" disabled={loading}>
+          {loading ? <PacmanLoading ballSize={5} /> : 'Sign up'}
+        </Button>
+
+        <FormLink>
+          Already have an account? <Link href="/sign-in">Sign in</Link>
+        </FormLink>
+      </form>
+    </FormWrapper>
+  )
+}
 
 export default FormSignUp

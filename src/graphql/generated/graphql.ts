@@ -1754,6 +1754,15 @@ export type UsersPermissionsUserRelationResponseCollection = {
   nodes: Array<UsersPermissionsUser>
 }
 
+export type MutationRegisterMutationVariables = Exact<{
+  registerInput: UsersPermissionsRegisterInput
+}>
+
+export type MutationRegisterMutation = {
+  __typename?: 'Mutation'
+  register: { __typename?: 'UsersPermissionsLoginPayload'; jwt?: string | null }
+}
+
 export type GetGameBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input']
 }>
@@ -1977,6 +1986,60 @@ export type GetHomeQuery = {
   } | null
 }
 
+export const MutationRegisterDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'MutationRegister' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'registerInput' }
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'UsersPermissionsRegisterInput' }
+            }
+          }
+        }
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'register' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'registerInput' }
+                }
+              }
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'jwt' } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<
+  MutationRegisterMutation,
+  MutationRegisterMutationVariables
+>
 export const GetGameBySlugDocument = {
   kind: 'Document',
   definitions: [

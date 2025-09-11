@@ -12,7 +12,7 @@ const props = {
 }
 
 describe('<Banner />', () => {
-  it('should render the heading', () => {
+  it('should render the Banner component', () => {
     const { container } = renderWithTheme(<Banner {...props} />)
 
     expect(

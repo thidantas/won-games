@@ -16,10 +16,11 @@ import UserDropdown from 'components/UserDropdown'
 import * as S from './styles'
 
 export type MenuProps = {
-  username?: string
+  username?: string | null
+  loading?: boolean
 }
 
-const Menu = ({ username }: MenuProps) => {
+const Menu = ({ username, loading }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -43,64 +44,75 @@ const Menu = ({ username }: MenuProps) => {
         </S.MenuNav>
       </MediaMatch>
 
-      <S.MenuGroup>
-        <S.IconWrapper>
-          <SearchIcon aria-label="Search" />
-        </S.IconWrapper>
+      {!loading && (
+        <>
+          <S.MenuGroup>
+            <S.IconWrapper>
+              <SearchIcon aria-label="Search" />
+            </S.IconWrapper>
 
-        <S.IconWrapper>
-          <MediaMatch greaterThan="medium">
-            <CartDropdown />
-          </MediaMatch>
-          <MediaMatch lessThan="medium">
-            <Link href="/cart">
-              <CartIcon />
-            </Link>
-          </MediaMatch>
-        </S.IconWrapper>
+            <S.IconWrapper>
+              <MediaMatch greaterThan="medium">
+                <CartDropdown />
+              </MediaMatch>
+              <MediaMatch lessThan="medium">
+                <Link href="/cart">
+                  <CartIcon />
+                </Link>
+              </MediaMatch>
+            </S.IconWrapper>
 
-        <MediaMatch greaterThan="medium">
-          {!username ? (
-            <Link href="sign-in">
-              <Button>Sign in</Button>
-            </Link>
-          ) : (
-            <UserDropdown username={username} />
-          )}
-        </MediaMatch>
-      </S.MenuGroup>
+            <MediaMatch greaterThan="medium">
+              {!username ? (
+                <Link href="sign-in">
+                  <Button>Sign in</Button>
+                </Link>
+              ) : (
+                <UserDropdown username={username} />
+              )}
+            </MediaMatch>
+          </S.MenuGroup>
 
-      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen} aria-label="Menu Full">
-        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+          <S.MenuFull
+            aria-hidden={!isOpen}
+            isOpen={isOpen}
+            aria-label="Menu Full"
+          >
+            <CloseIcon
+              aria-label="Close Menu"
+              onClick={() => setIsOpen(false)}
+            />
 
-        <S.MenuNav>
-          <S.MenuLink href="/">Home</S.MenuLink>
-          <S.MenuLink href="/games">Explore</S.MenuLink>
+            <S.MenuNav>
+              <S.MenuLink href="/">Home</S.MenuLink>
+              <S.MenuLink href="/games">Explore</S.MenuLink>
 
-          {!!username && (
-            <>
-              <S.MenuLink href="/profile/me">My Profile</S.MenuLink>
-              <S.MenuLink href="/wishlist">Wishlist</S.MenuLink>
-            </>
-          )}
-        </S.MenuNav>
+              {!!username && (
+                <>
+                  <S.MenuLink href="/profile/me">My Profile</S.MenuLink>
+                  <S.MenuLink href="/wishlist">Wishlist</S.MenuLink>
+                </>
+              )}
+            </S.MenuNav>
 
-        {!username && (
-          <S.RegisterBox>
-            <Link href="/sign-in">
-              <Button fullWidth size="large">
-                Sign in
-              </Button>
-            </Link>
+            {!username && (
+              <S.RegisterBox>
+                <Link href="/sign-in">
+                  <Button fullWidth size="large">
+                    Sign in
+                  </Button>
+                </Link>
 
-            <span>or</span>
+                <span>or</span>
 
-            <S.CreateAccount href="/sign-up" title="Sign Up">
-              Sign Up
-            </S.CreateAccount>
-          </S.RegisterBox>
-        )}
-      </S.MenuFull>
+                <S.CreateAccount href="/sign-up" title="Sign Up">
+                  Sign Up
+                </S.CreateAccount>
+              </S.RegisterBox>
+            )}
+          </S.MenuFull>
+        </>
+      )}
     </S.Wrapper>
   )
 }

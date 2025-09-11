@@ -58,4 +58,11 @@ describe('<Menu />', () => {
     expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()
   })
+
+  it('should not show sign in or dropdownUser if loading', () => {
+    renderWithTheme(<Menu username="John Doe" loading />)
+
+    expect(screen.queryByText(/my profile/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
+  })
 })

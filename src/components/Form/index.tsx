@@ -18,6 +18,21 @@ export const FormWrapper = styled.div`
   `}
 `
 
+export const FormError = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      width: 1.6rem;
+      margin-right: 0.4rem;
+    }
+  `}
+`
+
 export const FormLink = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};

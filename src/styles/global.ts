@@ -63,6 +63,11 @@ ${({ theme, removeBg }) => css`
     `}
   }
 `}
+
+#bprogress .peg {
+  box-shadow: 0 0 10px ${(props) => props.theme.colors.primary},
+    0 0 5px ${(props) => props.theme.colors.primary} !important;
+}
 `
 
 export default GlobalStyles

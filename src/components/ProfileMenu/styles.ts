@@ -73,3 +73,34 @@ export const ProfileLink = styled(Link).withConfig({
     ${!isActive && linkModifiers.default(theme)}
   `}
 `
+
+export const ProfileSignOut = styled.a`
+  ${({ theme }) => css`
+    display: flex;
+    cursor: pointer;
+    font-size: ${theme.font.sizes.large};
+    background: ${theme.colors.white};
+    color: ${theme.colors.black};
+    text-decoration: none;
+    align-items: center;
+    padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+    transition: background, color, ${theme.transition.default};
+
+    &:hover {
+      background: ${theme.colors.primary};
+      color: ${theme.colors.white};
+    }
+
+    span {
+      margin-left: ${theme.spacings.xsmall};
+    }
+
+    ${media.lessThan('medium')`
+      justify-content: center;
+
+       span {
+        display: none;
+      }
+      `}
+  `}
+`

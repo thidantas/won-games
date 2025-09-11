@@ -4,6 +4,13 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import FormSignIn from '.'
 
+jest.mock('next/navigation', () => ({
+  useSearchParams: jest.fn(() => new URLSearchParams()),
+  useRouter: jest.fn(() => ({
+    push: jest.fn()
+  }))
+}))
+
 describe('<FormSignIn />', () => {
   it('should render the form sign in', () => {
     const { container } = renderWithTheme(<FormSignIn />)

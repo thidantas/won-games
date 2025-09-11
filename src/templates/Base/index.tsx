@@ -1,3 +1,7 @@
+'use client'
+
+import { useSession } from 'next-auth/react'
+
 import Menu from 'components/Menu'
 import Footer from 'components/Footer'
 import { Container } from 'components/Container'
@@ -8,20 +12,27 @@ export type BaseTemplateProps = {
   children: React.ReactNode
 }
 
-const Base = ({ children }: BaseTemplateProps) => (
-  <S.Wrapper>
-    <Container>
-      <Menu />
-    </Container>
+const Base = ({ children }: BaseTemplateProps) => {
+  const { data: session, status } = useSession()
 
-    <S.Content>{children}</S.Content>
-
-    <S.SectionFooter>
+  return (
+    <S.Wrapper>
       <Container>
-        <Footer />
+        <Menu
+          username={session?.user?.username}
+          loading={status === 'loading'}
+        />
       </Container>
-    </S.SectionFooter>
-  </S.Wrapper>
-)
+
+      <S.Content>{children}</S.Content>
+
+      <S.SectionFooter>
+        <Container>
+          <Footer />
+        </Container>
+      </S.SectionFooter>
+    </S.Wrapper>
+  )
+}
 
 export default Base

@@ -1,5 +1,5 @@
 import makeClient from 'providers/ApolloProvider/client'
-import { ApolloProvider } from 'providers/ApolloProvider'
+import ApolloProvider from 'providers/ApolloProvider'
 import { getGames } from 'services/ssr/games/getGames'
 import Games, { GamesProps } from 'templates/Games'
 import exploreSidebarItemsMock from 'components/ExploreSidebar/mock'

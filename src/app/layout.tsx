@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
 import { GlobalStylesProvider } from 'providers/GlobalStylesProvider'
+import ProgressBarProvider from 'providers/ProgressBarProvider'
+import NextAuthSessionProvider from 'providers/NextAuthSessionProvider'
 
 export const metadata: Metadata = {
   title: 'Won Games',
@@ -16,9 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStylesProvider>{children}</GlobalStylesProvider>
-        </StyledComponentsRegistry>
+        <NextAuthSessionProvider>
+          <StyledComponentsRegistry>
+            <GlobalStylesProvider>
+              <ProgressBarProvider>{children}</ProgressBarProvider>
+            </GlobalStylesProvider>
+          </StyledComponentsRegistry>
+        </NextAuthSessionProvider>
       </body>
     </html>
   )

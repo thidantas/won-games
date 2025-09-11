@@ -24,6 +24,7 @@ jest.mock('components/ExploreSidebar', () => ({
     return <div data-testid="Mock ExploreSidebar" />
   }
 }))
+
 const mockUseGames = useGames as jest.Mock
 
 describe('<Games />', () => {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { signOut } from 'next-auth/react'
 import {
   ExitToApp,
   CreditCard,
@@ -21,25 +22,16 @@ const profileMenuItems = [
     href: '/profile/orders',
     icon: <FormatListBulleted size={24} />,
     label: 'My orders'
-  },
-  {
-    href: '/logout',
-    icon: <ExitToApp size={24} />,
-    label: 'Sign out'
   }
 ]
 
-export type ProfileRoutes =
-  | '/profile/me'
-  | '/profile/cards'
-  | '/profile/orders'
-  | '/logout'
+export type ProfileRoutes = '/profile/me' | '/profile/cards' | '/profile/orders'
 
 export type ProfileMenuProps = {
   activeProfile?: ProfileRoutes
 }
 
-const ProfileMenu = ({ activeProfile }: ProfileMenuProps) => {
+const ProfileMenu = ({ activeProfile = '/profile/me' }: ProfileMenuProps) => {
   const [activeLink, setActiveLink] = useState(activeProfile)
 
   useEffect(() => {
@@ -61,6 +53,12 @@ const ProfileMenu = ({ activeProfile }: ProfileMenuProps) => {
             </li>
           )
         })}
+        <li>
+          <S.ProfileSignOut role="button" onClick={() => signOut()}>
+            <ExitToApp size={24} />
+            <span>Sign out</span>
+          </S.ProfileSignOut>
+        </li>
       </S.ProfileList>
     </nav>
   )

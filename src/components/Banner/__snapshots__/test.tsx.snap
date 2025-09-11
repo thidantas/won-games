@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Banner /> should render the heading 1`] = `
+exports[`<Banner /> should render the Banner component 1`] = `
 .c5 {
   cursor: pointer;
   display: -webkit-inline-box;

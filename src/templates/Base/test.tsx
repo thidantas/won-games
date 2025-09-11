@@ -4,6 +4,17 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import Base from '.'
 
+jest.mock('next-auth/react', () => {
+  return {
+    __esModule: true,
+    useSession: jest.fn(() => {
+      return {
+        data: { user: null }
+      }
+    })
+  }
+})
+
 jest.mock('components/Menu', () => {
   return {
     __esModule: true,
