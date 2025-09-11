@@ -45,3 +45,31 @@ export const Link = styled(NextLink)`
     }
   `}
 `
+
+export const SignOut = styled.button`
+  ${({ theme }) => css`
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    background: ${theme.colors.white};
+    border-color: transparent;
+    color: ${theme.colors.black};
+    padding: ${theme.spacings.small} ${theme.spacings.small};
+    transition: background, color, ${theme.transition.default};
+
+    &:hover {
+      background: ${theme.colors.primary};
+      color: ${theme.colors.white};
+    }
+
+    > svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+
+    > span {
+      margin-left: ${theme.spacings.xsmall};
+    }
+  `}
+`
