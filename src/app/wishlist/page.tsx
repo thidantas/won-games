@@ -1,3 +1,7 @@
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
+
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getRecommendedGames } from 'services/ssr/games/getRecommendedGames'
 import Wishlist, { WishlistTemplateProps } from 'templates/Wishlist'
 import { HighlightProps } from 'components/Highlight'
@@ -16,6 +20,13 @@ export default async function WishlistPage() {
   if (isCI) {
     return <Wishlist {...mockProps} />
   }
+
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    redirect('/sign-in')
+  }
+
   const recommended = await getRecommendedGames()
 
   return (
