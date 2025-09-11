@@ -1,5 +1,3 @@
-'use client'
-
 import media from 'styled-media-query'
 import styled, { css } from 'styled-components'
 
