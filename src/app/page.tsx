@@ -33,7 +33,6 @@ export default async function App() {
 
   return (
     <Home
-      {...mockProps}
       banners={home?.banners as BannerProps[]}
       newGames={home?.newGames as GameCardProps[]}
       upcomingGamesTitle={home?.upcomingGamesTitle as string}

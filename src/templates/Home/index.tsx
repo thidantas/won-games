@@ -1,5 +1,3 @@
-'use client'
-
 import Base from 'templates/Base'
 import Showcase from 'components/Showcase'
 import BannerSlider from 'components/BannerSlider'
