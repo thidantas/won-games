@@ -8,6 +8,13 @@ jest.mock('next/navigation', () => ({
   usePathname: jest.fn().mockReturnValue('/profile/me')
 }))
 
+jest.mock('components/AuthGuard', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock AuthGuard">{children}</div>
+  }
+}))
+
 jest.mock('templates/Base', () => ({
   __esModule: true,
   default: function Mock({ children }: { children: React.ReactNode }) {
