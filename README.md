@@ -1,6 +1,6 @@
-## E-commerce games
+## Won games 
 
-This is a Next.js project to be used to advance React skills.
+Won is a project built with Next.js, leveraging advanced React development techniques. It aims to simulate a real-world e-commerce platform for digital game distribution.
 
 ## What is inside?
 
