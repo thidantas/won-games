@@ -4,12 +4,7 @@ import CartIcon, { CartIconProps } from '.'
 
 export default {
   title: 'components/CartIcon',
-  component: CartIcon,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  }
+  component: CartIcon
 } as Meta
 
 export const Default: StoryObj<CartIconProps> = {}

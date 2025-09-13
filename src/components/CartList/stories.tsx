@@ -7,12 +7,7 @@ import CartList, { CartListProps } from '.'
 export default {
   title: 'components/CartList',
   component: CartList,
-  args: { items: cartListMock, total: 'R$ 400,00' },
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  }
+  args: { items: cartListMock, total: 'R$ 400,00' }
 } as Meta
 
 export const Default: StoryObj<CartListProps> = {

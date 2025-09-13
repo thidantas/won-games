@@ -6,10 +6,7 @@ export default {
   title: 'components/Menu',
   component: Menu,
   parameters: {
-    layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark'
-    }
+    layout: 'fullscreen'
   }
 } as Meta
 

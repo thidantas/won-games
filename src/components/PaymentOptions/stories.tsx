@@ -14,11 +14,6 @@ export default {
     onPayment: {
       action: 'clicked'
     }
-  },
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
   }
 } as Meta
 

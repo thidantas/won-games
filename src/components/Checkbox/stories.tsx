@@ -5,11 +5,6 @@ import Checkbox, { CheckboxProps } from '.'
 export default {
   title: 'components/Forms/Checkbox',
   component: Checkbox,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  },
   argTypes: {
     label: {
       type: 'string'

@@ -5,11 +5,6 @@ import Radio, { RadioProps } from '.'
 export default {
   title: 'components/Forms/Radio',
   component: Radio,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  },
   argTypes: {
     label: {
       type: 'string'

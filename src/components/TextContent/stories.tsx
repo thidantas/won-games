@@ -7,12 +7,7 @@ import TextContent, { TextContentProps } from '.'
 export default {
   title: 'components/TextContent',
   component: TextContent,
-  args: textContentMock,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  }
+  args: textContentMock
 } as Meta
 
 export const Default: StoryFn<TextContentProps> = (args) => (

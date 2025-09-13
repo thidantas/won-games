@@ -14,11 +14,6 @@ export default {
         options: ['white', 'black']
       }
     }
-  },
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
   }
 } as Meta
 
