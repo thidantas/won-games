@@ -11,10 +11,7 @@ export default {
     items: galleryMock
   },
   parameters: {
-    layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark'
-    }
+    layout: 'fullscreen'
   }
 } as Meta
 

@@ -11,9 +11,9 @@ export default {
     items: cartListMock,
     total: 400.0
   },
-  parameters: {
+  globals: {
     backgrounds: {
-      default: 'dark'
+      value: 'dark'
     }
   }
 } as Meta

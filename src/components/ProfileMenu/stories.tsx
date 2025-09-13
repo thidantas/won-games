@@ -5,11 +5,6 @@ import ProfileMenu, { ProfileMenuProps } from '.'
 export default {
   title: 'components/ProfileMenu',
   component: ProfileMenu,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  },
   args: {
     activeProfile: '/profile/me'
   },

@@ -11,9 +11,6 @@ export default {
     items: exploreSidebarItemsMock
   },
   parameters: {
-    backgrounds: {
-      default: 'dark'
-    },
     layout: 'fullscreen'
   }
 } as Meta

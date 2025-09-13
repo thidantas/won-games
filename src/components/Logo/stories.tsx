@@ -28,11 +28,6 @@ export default {
     color: 'white',
     size: 'normal',
     hideOnMobile: false
-  },
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
   }
 } as Meta
 

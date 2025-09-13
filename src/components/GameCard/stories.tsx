@@ -32,11 +32,6 @@ export default {
       options: ['primary', 'secondary'],
       control: { type: 'select' }
     }
-  },
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
   }
 } as Meta
 

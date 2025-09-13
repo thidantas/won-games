@@ -4,12 +4,7 @@ import Dropdown, { DropdownProps } from '.'
 
 export default {
   title: 'components/Dropdown',
-  component: Dropdown,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  }
+  component: Dropdown
 } as Meta
 
 export const Default: StoryObj<DropdownProps> = {

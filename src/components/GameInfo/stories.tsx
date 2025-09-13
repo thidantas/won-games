@@ -7,12 +7,7 @@ import GameInfo, { GameInfoProps } from '.'
 export default {
   title: 'components/GameInfo',
   component: GameInfo,
-  args: gameInfoMock,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  }
+  args: gameInfoMock
 } as Meta
 
 export const Default: StoryFn<GameInfoProps> = (args) => (

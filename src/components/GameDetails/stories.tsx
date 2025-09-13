@@ -6,11 +6,6 @@ import GameDetails, { GameDetailsProps } from '.'
 export default {
   title: 'components/GameDetails',
   component: GameDetails,
-  parameters: {
-    backgrounds: {
-      default: 'dark'
-    }
-  },
   args: gameDetailsMock,
   argTypes: {
     platforms: {

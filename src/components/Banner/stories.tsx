@@ -17,9 +17,9 @@ export default {
     buttonLabel: 'Buy now',
     buttonLink: '/game/halo-4'
   },
-  parameters: {
+  globals: {
     backgrounds: {
-      default: 'dark'
+      value: 'dark'
     }
   }
 } as Meta
