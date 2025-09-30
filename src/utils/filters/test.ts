@@ -19,7 +19,7 @@ describe('parsedQueryStringToFilters', () => {
   it('should parse queryString to filters format', () => {
     const parsedQuery = parseQueryStringToFilters({
       queryString,
-      filterItems
+      filterSchemas: filterItems
     })
 
     expect(parsedQuery).toStrictEqual({
@@ -42,7 +42,7 @@ describe('parsedQueryStringToFilters', () => {
   it('should parse queryString to filters values format', () => {
     const parsedQuery = parseQueryStringToFilter({
       queryString,
-      filterItems
+      filterSchemas: filterItems
     })
 
     expect(parsedQuery).toStrictEqual({

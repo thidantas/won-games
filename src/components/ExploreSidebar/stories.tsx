@@ -10,6 +10,7 @@ export default {
   args: {
     items: exploreSidebarItemsMock
   },
+
   parameters: {
     layout: 'fullscreen'
   }
@@ -31,7 +32,7 @@ export const WithInitialValues: StoryObj<ExploreSidebarProps> = {
   ),
   args: {
     initialValues: {
-      windows: true,
+      platforms: ['windows', 'linux'],
       sort_by: 'low-to-high'
     }
   }

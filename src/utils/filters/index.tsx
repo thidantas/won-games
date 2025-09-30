@@ -3,7 +3,7 @@ import { ItemProps } from 'components/ExploreSidebar'
 
 type ParseArgs = {
   queryString?: Record<string, string | number | string[]>
-  filterItems: Pick<ItemProps, 'type' | 'name'>[]
+  filterSchemas: Pick<ItemProps, 'type' | 'name'>[]
 }
 
 type PriceFilter = {
@@ -45,7 +45,7 @@ function normalizeFilters(
 
 export const parseQueryStringToFilters = ({
   queryString,
-  filterItems
+  filterSchemas
 }: ParseArgs) => {
   if (!queryString || Object.keys(queryString).length === 0) return undefined
 
@@ -57,7 +57,7 @@ export const parseQueryStringToFilters = ({
   Object.keys(normalizedFilterParams)
     .filter((item) => item !== 'sort')
     .forEach((key) => {
-      const item = filterItems?.find((item) => item.name === key)
+      const item = filterSchemas?.find((item) => item.name === key)
       const isCheckbox = item?.type === 'checkbox'
 
       filterObject[key] = !isCheckbox
@@ -80,14 +80,14 @@ export const parseQueryStringToFilters = ({
 
 export const parseQueryStringToFilter = ({
   queryString,
-  filterItems
+  filterSchemas
 }: ParseArgs) => {
   if (!queryString) return undefined
 
   const obj: Record<string, string | number | (string | number)[]> = {}
 
   Object.keys(queryString).forEach((key) => {
-    const item = filterItems?.find((item) => item.name === key)
+    const item = filterSchemas?.find((item) => item.name === key)
 
     const value = queryString[key]
 

@@ -3,16 +3,18 @@ import ApolloProvider from 'providers/ApolloProvider'
 import { getGames } from 'services/ssr/games/getGames'
 import Games, { GamesProps } from 'templates/Games'
 import exploreSidebarItemsMock from 'components/ExploreSidebar/mock'
-import { GameCardProps } from 'components/GameCard'
-
-export const revalidate = 60
+import { filterSchemas } from 'app/games/schemas/filterSchemas'
+import { parseQueryStringToFilters } from 'utils/filters'
 
 const mockProps: GamesProps = {
-  games: [],
-  filterItems: exploreSidebarItemsMock
+  filterSchemas: exploreSidebarItemsMock
 }
 
-export default async function GamesPage() {
+export default async function GamesPage({
+  searchParams
+}: {
+  searchParams?: { [key: string]: string | string[] }
+}) {
   const isCI = process.env.NEXT_PUBLIC_CI === 'true'
 
   if (isCI) {
@@ -25,13 +27,22 @@ export default async function GamesPage() {
 
   const apolloClient = makeClient()
 
-  const fetchedGames = await getGames(apolloClient, { limit: 15 })
+  const filters = parseQueryStringToFilters({
+    queryString: searchParams,
+    filterSchemas
+  })
+
+  await getGames(apolloClient, {
+    limit: 15,
+    filters: filters,
+    sort: searchParams?.sort as string
+  })
 
   const initialApolloState = JSON.parse(JSON.stringify(apolloClient.extract()))
 
   return (
     <ApolloProvider initialState={initialApolloState}>
-      <Games {...mockProps} games={fetchedGames as GameCardProps[]} />
+      <Games filterSchemas={filterSchemas} />
     </ApolloProvider>
   )
 }
