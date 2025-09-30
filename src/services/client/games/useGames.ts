@@ -9,15 +9,18 @@ import {
 } from 'graphql/generated/graphql'
 import { mapGamesDTO } from 'dtos/games/games.dto'
 
-export const useGames = ({ limit }: GetGamesQueryVariables) => {
+export const useGames = ({ limit, filters, sort }: GetGamesQueryVariables) => {
   const isCI = process.env.NEXT_PUBLIC_CI === 'true'
 
   const { data, loading, error, fetchMore } = useQuery<
     GetGamesQuery,
     GetGamesQueryVariables
   >(GET_GAMES, {
+    notifyOnNetworkStatusChange: true,
     variables: {
-      limit
+      sort,
+      limit,
+      filters
     },
     skip: isCI
   })
@@ -25,6 +28,7 @@ export const useGames = ({ limit }: GetGamesQueryVariables) => {
   if (isCI) {
     return {
       data: [],
+      total: 0,
       error: null,
       loading: true,
       handleFetchMore: () => {}
@@ -46,6 +50,7 @@ export const useGames = ({ limit }: GetGamesQueryVariables) => {
 
   return {
     data: games,
+    total: data?.games_connection?.pageInfo?.total ?? 0,
     error,
     loading,
     handleFetchMore

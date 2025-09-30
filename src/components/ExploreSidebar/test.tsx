@@ -16,7 +16,9 @@ describe('<ExploreSidebar />', () => {
     expect(
       screen.getByRole('heading', { name: /sort by/i })
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /system/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /platforms/i })
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /genre/i })).toBeInTheDocument()
   })
 
@@ -46,7 +48,7 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(
       <ExploreSidebar
         items={exploreSidebarItemsMock}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
         onFilter={jest.fn}
       />
     )
@@ -61,16 +63,14 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(
       <ExploreSidebar
         items={exploreSidebarItemsMock}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
         onFilter={onFilter}
       />
     )
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
-
     await waitFor(() => {
       expect(onFilter).toHaveBeenCalledWith({
-        windows: true,
+        platforms: ['windows'],
         sort_by: 'low-to-high'
       })
     })
@@ -89,12 +89,9 @@ describe('<ExploreSidebar />', () => {
 
     userEvent.click(screen.getByLabelText(/low to high/i))
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
-
     await waitFor(() => {
-      expect(onFilter).toHaveBeenCalledWith({
-        linux: true,
-        windows: true,
+      expect(onFilter).toHaveBeenNthCalledWith(4, {
+        platforms: ['windows', 'linux'],
         sort_by: 'low-to-high'
       })
     })
@@ -110,8 +107,6 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByLabelText(/low to high/i))
 
     userEvent.click(screen.getByLabelText(/high to low/i))
-
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     await waitFor(() => {
       expect(onFilter).toHaveBeenCalledWith({
@@ -142,6 +137,12 @@ describe('<ExploreSidebar />', () => {
 
     await waitFor(() => {
       expect(overlay).toHaveStyle('opacity: 0')
+    })
+
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+
+    await waitFor(() => {
+      expect(overlay).not.toHaveStyle('opacity: 1')
     })
   })
 })
