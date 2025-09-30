@@ -27,7 +27,7 @@ const Games = ({ filterSchemas }: GamesProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const queryObject = Object.fromEntries(searchParams.entries())
+  const queryObject = Object.fromEntries(searchParams.entries() ?? [])
 
   const filters = parseQueryStringToFilters({
     queryString: queryObject,
@@ -51,7 +51,7 @@ const Games = ({ filterSchemas }: GamesProps) => {
     sort: sort
   })
 
-  const hasMoreGames = games.length < (totalLength || 0)
+  const hasMoreGames = games?.length < (totalLength || 0)
 
   const handleFilter = (
     selectedFilter: Record<string, string | number | Array<string | number>>

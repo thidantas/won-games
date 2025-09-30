@@ -5,22 +5,25 @@ import Games, { GamesProps } from 'templates/Games'
 import exploreSidebarItemsMock from 'components/ExploreSidebar/mock'
 import { filterSchemas } from 'app/games/schemas/filterSchemas'
 import { parseQueryStringToFilters } from 'utils/filters'
+import { Suspense } from 'react'
 
 const mockProps: GamesProps = {
   filterSchemas: exploreSidebarItemsMock
 }
 
 export default async function GamesPage({
-  searchParams
+  searchParamsServer
 }: {
-  searchParams?: { [key: string]: string | string[] }
+  searchParamsServer?: { [key: string]: string | string[] }
 }) {
   const isCI = process.env.NEXT_PUBLIC_CI === 'true'
 
   if (isCI) {
     return (
       <ApolloProvider initialState={{}}>
-        <Games {...mockProps} />
+        <Suspense fallback={<>...</>}>
+          <Games {...mockProps} />
+        </Suspense>
       </ApolloProvider>
     )
   }
@@ -28,14 +31,14 @@ export default async function GamesPage({
   const apolloClient = makeClient()
 
   const filters = parseQueryStringToFilters({
-    queryString: searchParams,
+    queryString: searchParamsServer,
     filterSchemas
   })
 
   await getGames(apolloClient, {
     limit: 15,
     filters: filters,
-    sort: searchParams?.sort as string
+    sort: searchParamsServer?.sort as string
   })
 
   const initialApolloState = JSON.parse(JSON.stringify(apolloClient.extract()))

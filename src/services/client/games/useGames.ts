@@ -28,6 +28,7 @@ export const useGames = ({ limit, filters, sort }: GetGamesQueryVariables) => {
   if (isCI) {
     return {
       data: [],
+      total: 0,
       error: null,
       loading: true,
       handleFetchMore: () => {}
