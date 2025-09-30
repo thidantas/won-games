@@ -1,4 +1,3 @@
- 
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
@@ -1793,6 +1792,11 @@ export type GetGameBySlugQuery = {
 export type GetGamesQueryVariables = Exact<{
   limit: Scalars['Int']['input']
   start?: InputMaybe<Scalars['Int']['input']>
+  filters?: InputMaybe<GameFiltersInput>
+  sort?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >
 }>
 
 export type GetGamesQuery = {
@@ -1804,7 +1808,12 @@ export type GetGamesQuery = {
     price: number
     cover?: { __typename?: 'UploadFile'; url: string } | null
     developers: Array<{ __typename?: 'Developer'; name: string } | null>
+    platforms: Array<{ __typename?: 'Platform'; name: string } | null>
   } | null>
+  games_connection?: {
+    __typename?: 'GameEntityResponseCollection'
+    pageInfo: { __typename?: 'Pagination'; total: number }
+  } | null
 }
 
 export type GetRecommendedGamesQueryVariables = Exact<{ [key: string]: never }>
@@ -2213,6 +2222,25 @@ export const GetGamesDocument = {
             name: { kind: 'Name', value: 'start' }
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } }
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'filters' }
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'GameFiltersInput' }
+          }
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sort' } },
+          type: {
+            kind: 'ListType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } }
+          }
         }
       ],
       selectionSet: {
@@ -2246,6 +2274,22 @@ export const GetGamesDocument = {
                     }
                   ]
                 }
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filters' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'filters' }
+                }
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sort' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sort' }
+                }
               }
             ],
             selectionSet: {
@@ -2273,7 +2317,46 @@ export const GetGamesDocument = {
                     ]
                   }
                 },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'platforms' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } }
+                    ]
+                  }
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'price' } }
+              ]
+            }
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'games_connection' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filters' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'filters' }
+                }
+              }
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pageInfo' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'total' } }
+                    ]
+                  }
+                }
               ]
             }
           }
